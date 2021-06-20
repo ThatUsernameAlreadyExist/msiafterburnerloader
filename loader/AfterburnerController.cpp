@@ -150,6 +150,11 @@ bool AfterburnerController::tryFindAfterburnerExecutable()
         afterburnerExecutablePath = getValidAfterburnerPath(afterburnerDirPath);
     }
 
+    if (afterburnerExecutablePath.empty())
+    {
+        afterburnerExecutablePath = getValidAfterburnerPath(FileSystem::getExecutableDirPath());
+    }
+
     for (size_t i = 0; i < kDefaultAfterburnerDirPaths.size() && afterburnerExecutablePath.empty(); ++i)
     {
         for (wchar_t disk = 'A'; disk <= 'Z' && afterburnerExecutablePath.empty(); ++disk)
