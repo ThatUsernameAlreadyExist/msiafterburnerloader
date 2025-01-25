@@ -47,6 +47,7 @@ protected:
     virtual void onMenu(HMENU submenu, uint16_t menuId) = 0;
     virtual bool onEvent(UINT uMsg, WPARAM wParam, LPARAM lParam) = 0;
     virtual void onTimer(UINT timerId) = 0;
+    virtual void onTaskbarCreated() = 0;
 
     void setMenuItemCheckedState(HMENU menuId, UINT itemId, bool isChecked) const;
     void appendMenu(HMENU menuId, UINT_PTR itemId, TranslationID text) const;
@@ -65,6 +66,7 @@ private:
 
 private:
     HWND mainWindow;
+    UINT taskbarCreatedMessage;
     ILoaderApp *app;
 };
 

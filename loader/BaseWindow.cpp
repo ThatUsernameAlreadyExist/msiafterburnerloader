@@ -85,6 +85,11 @@ LRESULT CALLBACK BaseWindow::mainWindowProc(HWND mainWindow, UINT uMsg, WPARAM w
             {
                 return 0;
             }
+            else if (pThis->taskbarCreatedMessage != 0 && uMsg == pThis->taskbarCreatedMessage)
+            {
+                pThis->onTaskbarCreated();
+                return 0;
+            }
         }
     }
 
@@ -133,6 +138,7 @@ LRESULT CALLBACK BaseWindow::menuHookProc(int nCode, WPARAM wParam, LPARAM lPara
 
 BaseWindow::BaseWindow()
     : mainWindow(nullptr)
+    , taskbarCreatedMessage(0)
     , app(nullptr)
 {}
 
@@ -156,6 +162,8 @@ bool BaseWindow::create(const wchar_t *className, const wchar_t *windowName, ILo
         app = trayApp;
 
         WindowsCommon::registerWindowClass(className, &BaseWindow::mainWindowProc);
+
+        taskbarCreatedMessage = RegisterWindowMessageW(L"TaskbarCreated");
 
         mainWindow = CreateWindowExW(0, className, windowName,
             WS_OVERLAPPEDWINDOW & ~WS_VISIBLE, 0, 0, 10, 10, nullptr, nullptr, MY_HINSTANCE, this);
@@ -181,6 +189,7 @@ void BaseWindow::destroy()
         DestroyWindow(mainWindow);
         mainWindow = nullptr;
         app = nullptr;
+        taskbarCreatedMessage = 0;
     }
 }
 

@@ -38,6 +38,7 @@ public:
 
     bool addToTray();
     bool removeFromTray();
+    bool restoreInTray();
     void setTooltip(const std::wstring &text);
     bool processEvents(UINT uMsg, WPARAM wParam, LPARAM lParam);
 

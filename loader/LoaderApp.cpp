@@ -371,6 +371,12 @@ void LoaderApp::onTimer(UINT timerId)
 }
 
 
+void LoaderApp::onTaskbarCreated()
+{
+    trayIcon.restoreInTray();
+}
+
+
 void LoaderApp::applyStartupProfile()
 {
     applyProfile(afterburner.getStartupProfile());

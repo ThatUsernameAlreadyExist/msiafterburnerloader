@@ -52,6 +52,7 @@ private:
     virtual void onMenu(HMENU submenu, uint16_t menuId) override final;
     virtual bool onEvent(UINT uMsg, WPARAM wParam, LPARAM lParam) override final;
     virtual void onTimer(UINT timerId) override final;
+    virtual void onTaskbarCreated() override final;
 
     void createMenu();
     void createAboutDialog();

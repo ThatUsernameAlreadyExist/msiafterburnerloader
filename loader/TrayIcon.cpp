@@ -77,6 +77,15 @@ bool TrayIcon::removeFromTray()
 }
 
 
+bool TrayIcon::restoreInTray()
+{
+    removeFromTray();
+    isInTray = false;
+
+    return addToTray();
+}
+
+
 void TrayIcon::setTooltip(const std::wstring &text)
 {
     if (isInTray)
